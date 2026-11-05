@@ -308,7 +308,7 @@ footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mu
 <section id="closet">
   <p class="eyebrow">My wardrobe</p>
   <h2>我有什麼</h2>
-  <p class="lead">每一件都是你衣櫥裡真的有的衣服。點開可以看它能怎麼搭、出現在哪幾套穿搭裡；紅字「0 套」代表還沒被搭配到。</p>
+  <p class="lead">每一件都是你衣櫥裡真的有的衣服。點開可以看它能怎麼搭、出現在哪幾套穿搭裡；紅字「0 套」代表還沒被搭配到。<br><span class="gd">✦ 女神單品</span>＝剪裁精緻、有質感、能撐住演講、諮詢、品牌活動這類重要場合，而且可以直接套進「公式 A 休閒商務」的單品。重要日子先從這些挑。</p>
   <div class="filters">
     <p class="lab">類別</p><div class="chips" id="fCat"></div>
     <p class="lab">顏色</p><div class="chips" id="fColor"></div>
@@ -562,7 +562,7 @@ modal.addEventListener('click',e=>{if(e.target===modal||e.target.closest('.mx'))
 document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
 function miniLook(l){return `<div class="ml" data-look="${l.id}"><div class="g">${l.items.slice(0,4).map(k=>img(byK[k])).join('')}</div><div class="t">${l.name}</div></div>`}
 function openItem(k){const i=byK[k];const ls=D.looks.filter(l=>l.items.includes(k));const sw=D.swaps[k];
- show(`<div class="mhead">${img(i)}<div class="b"><p class="eyebrow">${catName[i.c]||i.c}</p><h2 style="font-size:28px">${i.n}</h2>${i.g?'<div class="gd">✦ 女神單品：剪裁精緻、質感佳、能瞬間提升氣場</div>':''}
+ show(`<div class="mhead">${img(i)}<div class="b"><p class="eyebrow">${catName[i.c]||i.c}</p><h2 style="font-size:28px">${i.n}</h2>${i.g?'<div class="gd">✦ 女神單品：剪裁精緻、有質感、能撐住重要場合</div>':''}
  <dl class="kv"><dt>顏色</dt><dd><span class="dot" style="background:${CG[i.cg]}"></span>${i.cg}${PLAN.includes(i.cg)?'（色彩計畫主色）':''}</dd><dt>季節</dt><dd>${i.s}</dd><dt>正式程度</dt><dd>${i.f}</dd><dt>出現在</dt><dd>${ls.length} 套穿搭</dd></dl>
  ${i.note?`<p style="font-size:15px">💡 ${i.note}</p>`:''}</div></div>
  <div class="mbody">${sw?`<h3 style="margin-top:18px">替換指南：同一件，換底穿出不同感覺</h3><p class="fitlooks">選下身原則：${sw.rule}</p><div class="swap"><ul>${sw.opts.map(o=>`<li><span class="stars">${'★'.repeat(o.stars)}${'☆'.repeat(3-o.stars)}</span> <a data-item="${o.k}" style="cursor:pointer;text-decoration:underline">${byK[o.k].n}</a>：${o.t}</li>`).join('')}</ul></div>`:''}
