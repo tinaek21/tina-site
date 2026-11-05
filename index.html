@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Weekie 的衣櫥與穿搭規劃｜輕鬆、有序、充滿生命力</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700;900&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F1E8; --card:#FFFDF9; --ink:#2E2A26; --mute:#7A7068; --line:#E6DDCF;
+  --pink:#E9B4AE; --orange:#E8913A; --blue:#7FA3C6; --yellow:#F2CF4A; --off:#F3EDE2;
+  --red:#C8463D; --camel:#B98A57; --green:#7E8B5E;
+  --serif:"Noto Serif TC",serif; --sans:"Noto Sans TC",system-ui,sans-serif; --hand:"Caveat",cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:28px 28px;background-attachment:fixed;line-height:1.7;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(246,241,232,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:auto;display:flex;align-items:center;gap:18px;padding:10px 20px;overflow-x:auto;scrollbar-width:none}
+.nav-in::-webkit-scrollbar{display:none}
+.brand{font-family:var(--serif);font-weight:900;white-space:nowrap;font-size:17px}
+.brand small{font-family:var(--hand);color:var(--orange);font-size:18px;margin-left:4px}
+.nav a{text-decoration:none;font-size:14px;color:var(--mute);white-space:nowrap;padding:4px 2px;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.on{color:var(--ink);border-color:var(--orange)}
+
+.wrap{max-width:1180px;margin:auto;padding:0 20px}
+section{padding:64px 0 24px}
+.eyebrow{font-family:var(--hand);font-size:22px;color:var(--orange);margin:0}
+h2{font-family:var(--serif);font-size:clamp(28px,4vw,40px);margin:0 0 6px;font-weight:900;letter-spacing:.02em}
+.lead{color:var(--mute);margin:0 0 28px;max-width:720px}
+h3{font-family:var(--serif);margin:0 0 8px}
+
+/* tags / tape */
+.tape{display:inline-block;padding:4px 14px;font-size:13px;font-weight:500;border-radius:2px;position:relative;
+  clip-path:polygon(0 0,100% 0,97% 50%,100% 100%,0 100%,3% 50%)}
+.chip{border:1px solid var(--line);background:var(--card);padding:6px 14px;border-radius:999px;font-size:14px;white-space:nowrap;transition:.15s}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.filters{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px 6px;margin-bottom:22px}
+.filters .lab{font-size:12px;color:var(--mute);margin:0 0 6px;letter-spacing:.08em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+.polaroid{background:#fff;padding:10px 10px 34px;box-shadow:0 8px 24px rgba(60,40,20,.12);position:relative}
+.polaroid::before{content:"";position:absolute;top:-12px;left:50%;width:90px;height:24px;transform:translateX(-50%) rotate(-3deg);background:rgba(242,207,74,.55)}
+.polaroid .cap{position:absolute;bottom:6px;left:0;right:0;text-align:center;font-family:var(--hand);font-size:19px;color:var(--mute)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:48px 0 24px}
+.hero h1{font-family:var(--serif);font-size:clamp(36px,6vw,64px);line-height:1.15;margin:8px 0 16px;font-weight:900}
+.hero h1 span{background:linear-gradient(transparent 62%,rgba(233,180,174,.7) 0)}
+.hero p.sub{font-size:18px;color:var(--mute);margin:0 0 22px}
+.mantra{font-family:var(--serif);font-size:20px;border-left:4px solid var(--orange);padding:6px 0 6px 16px;margin:24px 0}
+.values{display:flex;flex-wrap:wrap;gap:8px}
+.hero-photo{justify-self:center;max-width:380px;transform:rotate(2deg)}
+.hero-photo img{aspect-ratio:3/4;object-fit:cover;width:100%}
+.stats{display:flex;gap:28px;margin-top:26px;flex-wrap:wrap}
+.stat b{font-family:var(--serif);font-size:34px;display:block;line-height:1}
+.stat span{font-size:13px;color:var(--mute)}
+
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:8px}
+.role{overflow:hidden}
+.role img{aspect-ratio:4/5;object-fit:cover;width:100%;object-position:top}
+.role .b{padding:16px 18px 20px}
+.role .kw{font-size:13px;color:var(--mute)}
+.palette{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:22px 0}
+.sw{border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.sw i{display:block;height:84px}
+.sw div{padding:8px 10px;font-size:13px}
+.sw b{font-family:var(--serif);font-size:15px;display:block}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pyr{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px}
+.pyr div{text-align:center;padding:10px;color:#fff;font-weight:700;border-radius:4px}
+.pyr small{display:block;font-weight:400;font-size:12px;opacity:.95}
+.rules{padding:20px 22px}
+.rules li{margin:6px 0}
+
+/* today */
+.today{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:16px}
+.day{padding:10px;display:flex;flex-direction:column;gap:6px}
+.day h4{margin:0;font-family:var(--serif)}
+.day select{width:100%;font:inherit;font-size:12px;padding:4px;border:1px solid var(--line);border-radius:6px;background:#fff}
+.day .mini{display:grid;grid-template-columns:1fr 1fr;gap:3px;cursor:pointer}
+.day .mini img{aspect-ratio:1;object-fit:cover;width:100%;border-radius:4px}
+.day .nm{font-size:13px;font-weight:700;cursor:pointer}
+.day .re{font-size:12px;border:none;background:none;color:var(--orange);padding:0;text-align:left}
+
+/* wardrobe grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
+.item{overflow:hidden;cursor:pointer;transition:transform .15s}
+.item:hover{transform:translateY(-3px)}
+.item img{aspect-ratio:1;object-fit:cover;width:100%;background:#fff}
+.item .b{padding:8px 10px 10px}
+.item .n{font-size:14px;font-weight:500;line-height:1.4}
+.item .m{font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:6px;margin-top:4px}
+.gd{color:var(--orange);font-size:12px;font-weight:700}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,.15);vertical-align:-1px;margin-right:4px}
+.zero{color:var(--red)}
+.count{font-size:14px;color:var(--mute);margin:0 0 12px}
+
+/* looks */
+.looks{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.look{overflow:hidden;display:flex;flex-direction:column}
+.look .vis{display:grid;gap:3px;background:#fff;position:relative;cursor:pointer}
+.look .vis.c2{grid-template-columns:1fr 1fr}
+.look .vis.c3{grid-template-columns:1fr 1fr 1fr}
+.look .vis.ph{grid-template-columns:1.25fr 1fr}
+.look .vis img{width:100%;height:100%;object-fit:cover;aspect-ratio:1}
+.look .vis .phimg{grid-row:span 3;aspect-ratio:auto;height:100%;object-position:top}
+.look .vis .side{display:grid;gap:3px}
+.real{position:absolute;left:10px;top:10px;background:var(--ink);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px}
+.look .b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.look .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.look h3{font-size:20px}
+.look .its{font-size:13px;color:var(--mute)}
+.look .why{font-size:14px;margin:0}
+.temps{font-size:12px;color:var(--mute)}
+
+/* rules */
+.law{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.law .card{padding:20px}
+.law .no{font-family:var(--hand);font-size:34px;color:var(--orange);line-height:1}
+.combo{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.combo .bar{display:flex;height:90px;border-radius:8px 8px 0 0;overflow:hidden}
+.combo .bar i{flex:1}
+.combo .t{padding:10px;font-size:13px}
+.combo .t b{font-family:var(--serif);font-size:15px;display:block}
+.tricks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tricks .card{padding:18px 20px;display:flex;gap:14px;align-items:flex-start}
+.tricks img{width:84px;height:84px;object-fit:cover;border-radius:8px;flex:none;background:#fff}
+.acc{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.acc .card{padding:12px;text-align:center;font-size:13px}
+.acc img{aspect-ratio:1;object-fit:contain;width:100%;background:#fff;border-radius:8px;margin-bottom:8px}
+
+/* gaps */
+.gapgrid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.bars .row{display:grid;grid-template-columns:72px 1fr 40px;align-items:center;gap:10px;margin:7px 0;font-size:14px}
+.bars .tr{height:14px;background:var(--off);border-radius:99px;overflow:hidden}
+.bars .tr i{display:block;height:100%;border-radius:99px}
+.bars .row.key{font-weight:700}
+.bars .row.key::after{content:""}
+.gapcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+.gap{padding:18px;border-top:5px solid var(--orange)}
+.gap.ok{border-top-color:var(--green)}
+.gap .st{font-size:12px;font-weight:700;color:var(--orange)}
+.gap.ok .st{color:var(--green)}
+.gap p{font-size:14px;margin:6px 0 0}
+.dec{display:flex;gap:12px;align-items:center;padding:12px}
+.dec img{width:72px;height:72px;object-fit:cover;border-radius:8px}
+
+/* shop */
+.shop{display:flex;flex-direction:column;gap:16px}
+.sh{padding:18px 20px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.pri{font-family:var(--serif);font-weight:900;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff}
+.sh h3{font-size:19px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sh label{font-size:13px;font-weight:400;color:var(--mute);display:flex;gap:4px;align-items:center;cursor:pointer}
+.sh.done{opacity:.55}
+.sh.done h3 span{text-decoration:line-through}
+.cands{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+.cand{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;font-size:13px}
+.cand img{aspect-ratio:1;object-fit:cover;width:100%}
+.cand .b{padding:8px}
+.v{font-weight:700;font-size:12px;padding:1px 8px;border-radius:99px;color:#fff}
+.v.推薦{background:var(--green)} .v.可以{background:var(--blue)} .v.不建議{background:var(--red)}
+.fitlooks{font-size:13px;color:var(--mute)}
+.fitlooks a{color:var(--ink);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.flow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0 26px}
+.flow .card{padding:12px 16px;font-size:14px}
+.flow .arr{color:var(--mute)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(30,25,20,.55);display:none;z-index:100;padding:20px;overflow:auto}
+.modal.on{display:flex;align-items:flex-start;justify-content:center}
+.mbox{background:var(--card);border-radius:18px;max-width:880px;width:100%;margin:auto;overflow:hidden;position:relative}
+.mx{position:absolute;right:12px;top:10px;border:none;background:#fff;border-radius:50%;width:36px;height:36px;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.15);z-index:2}
+.mhead{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.mhead img{width:100%;height:100%;max-height:440px;object-fit:cover;background:#fff}
+.mhead .b{padding:24px}
+.mbody{padding:0 24px 24px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px;margin:12px 0}
+.kv dt{color:var(--mute)}
+.swap li{margin:6px 0;font-size:14px;list-style:none}
+.swap ul{padding:0;margin:8px 0}
+.stars{color:var(--orange);letter-spacing:1px}
+.minilooks{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:8px}
+.ml{cursor:pointer;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.ml .g{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.ml img{aspect-ratio:1;object-fit:cover;width:100%}
+.ml div.t{padding:6px 8px;font-size:13px;font-weight:500}
+.lookmodal .pieces{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+
+footer{text-align:center;padding:60px 20px 80px;font-family:var(--serif);font-size:22px}
+footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mute);margin-top:10px}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:28px}
+  .hero-photo{max-width:300px;order:-1}
+  .roles,.law,.today{grid-template-columns:1fr}
+  .palette,.combo{grid-template-columns:repeat(2,1fr)}
+  .acc{grid-template-columns:repeat(3,1fr)}
+  .twocol,.gapgrid,.tricks{grid-template-columns:1fr}
+  .gapcards{grid-template-columns:1fr 1fr}
+  .week{grid-template-columns:repeat(2,1fr)}
+  .mhead{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+@media (max-width:520px){ .gapcards{grid-template-columns:1fr} section{padding-top:48px} }
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-in">
+  <div class="brand">Weekie<small>style atlas</small></div>
+  <a href="#me">我是誰</a><a href="#today">今天穿什麼</a><a href="#closet">我有什麼</a><a href="#looks">怎麼穿</a>
+  <a href="#rules">穿搭法則</a><a href="#gaps">缺什麼</a><a href="#shop">要買什麼</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ========== 我是誰 ========== -->
+<section id="me" style="padding-top:20px">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Personal Brand &amp; Style Playbook</p>
+      <h1>輕鬆、有序、<br><span>充滿生命力</span></h1>
+      <p class="sub">自己喜歡自己的樣子，在生活與事業中找到完美的平衡與節奏。</p>
+      <div class="values">
+        <span class="tape" style="background:var(--pink)">愛 Love</span>
+        <span class="tape" style="background:var(--orange);color:#fff">信任 Trust</span>
+        <span class="tape" style="background:var(--blue);color:#fff">健康 Health</span>
+        <span class="tape" style="background:var(--yellow)">幸福 Happiness</span>
+        <span class="tape" style="background:#E7DCC8">貢獻 Contribution</span>
+      </div>
+      <p class="mantra">即使身邊沒有人，也要呈現喜歡的樣子給自己看。</p>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="hero-photo polaroid"><img src="assets/me/hero.jpg" alt="紅色雙排扣西裝外套形象照"><div class="cap">Look 01 ✦ 溫暖女王</div></div>
+  </div>
+
+  <h3 style="margin-top:32px">三個角色，一個我</h3>
+  <div class="roles">
+    <div class="card role"><img src="assets/me/olive2.jpg" alt=""><div class="b"><span class="tape" style="background:var(--pink)">品牌行銷教練</span><p class="kw">洞察力・說服力・值得信任</p><div>幫助創業者將夢想變成可持續發展的事業。</div></div></div>
+    <div class="card role"><img src="assets/me/cream.jpg" alt=""><div class="b"><span class="tape" style="background:var(--blue);color:#fff">關係教練</span><p class="kw">高度同理心・溫和有力・療癒感</p><div>賦予人們理解自他的能力，建立穩固滿足的連結。</div></div></div>
+    <div class="card role"><img src="assets/me/fun.jpg" alt=""><div class="b"><span class="tape" style="background:var(--orange);color:#fff">溫暖的角色</span><p class="kw">媽咪・太太・女性自我</p><div>溫暖有趣、被愛包圍、充滿生命力。</div></div></div>
+  </div>
+
+  <h3 style="margin-top:40px">我的色彩計畫</h3>
+  <div class="palette">
+    <div class="sw"><i style="background:#F3EDE2"></i><div><b>米白</b>乾淨、柔和</div></div>
+    <div class="sw"><i style="background:var(--pink)"></i><div><b>粉</b>溫柔、親和</div></div>
+    <div class="sw"><i style="background:var(--orange)"></i><div><b>橘</b>活力、生命力</div></div>
+    <div class="sw"><i style="background:var(--blue)"></i><div><b>藍</b>知性、平靜</div></div>
+    <div class="sw"><i style="background:var(--yellow)"></i><div><b>黃</b>創意、明亮</div></div>
+  </div>
+  <div class="twocol">
+    <div class="card">
+      <div class="pyr">
+        <h3>選物優先級</h3>
+        <div style="background:#C9A97E;width:100%">功能性 Comfort<small>穿起來舒服，手摸確認不刺扎</small></div>
+        <div style="background:#B7B6C4;width:85%">質感 Quality<small>真皮包款不脆化，經典耐看</small></div>
+        <div style="background:#8F9A6E;width:70%">合身 Fit<small>修飾身形但絕不緊身</small></div>
+        <div style="background:#5E6E8C;width:55%">設計 Design<small>最底層的點綴，不過度年輕花俏</small></div>
+      </div>
+    </div>
+    <div class="card rules">
+      <h3>絕對守則</h3>
+      <ul>
+        <li><b>鞋履</b>：經典款黑／白／米為主，寬矮跟；隨身帶平底鞋替換。</li>
+        <li><b>配件</b>：鴨舌帽與針編帽優先，拒絕漁夫帽。</li>
+        <li><b>氣色</b>：未化妝時避免單穿淺綠色，需要氣色支撐。</li>
+        <li><b>點綴</b>：亮色絲巾、皮帶、精緻項鏈提升層次。</li>
+        <li><b>斷捨離</b>：超過五年沒穿就回收；猶豫就錄影問 Melony。</li>
+        <li><b>新衣服</b>：立刻剪吊牌穿出門，穿越多次單位成本越低。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 今天穿什麼 ========== -->
+<section id="today">
+  <p class="eyebrow">What to wear today</p>
+  <h2>今天穿什麼？</h2>
+  <p class="lead">選今天的場合和天氣，直接從你衣櫥裡已經有的衣服推薦三套。</p>
+  <div class="filters">
+    <p class="lab">場合</p><div class="chips" id="tScene"></div>
+    <p class="lab">天氣</p><div class="chips" id="tTemp"></div>
+  </div>
+  <div class="today" id="todayOut"></div>
+  <div style="text-align:center;margin-top:16px"><button class="chip" id="reroll">↻ 換一批</button></div>
+
+  <h3 style="margin-top:44px">一週穿搭計畫</h3>
+  <p class="lead" style="margin-bottom:6px">每天的場合可以自己改；按「換一套」重新挑。計畫會記在這台裝置上。</p>
+  <div class="chips" id="wTemp"></div>
+  <div class="week" id="week"></div>
+</section>
+
+<!-- ========== 我有什麼 ========== -->
+<section id="closet">
+  <p class="eyebrow">My wardrobe</p>
+  <h2>我有什麼</h2>
+  <p class="lead">每一件都是你衣櫥裡真的有的衣服。點開可以看它能怎麼搭、出現在哪幾套穿搭裡；紅字「0 套」代表還沒被搭配到。</p>
+  <div class="filters">
+    <p class="lab">類別</p><div class="chips" id="fCat"></div>
+    <p class="lab">顏色</p><div class="chips" id="fColor"></div>
+    <p class="lab">季節</p><div class="chips" id="fSeason"></div>
+  </div>
+  <p class="count" id="cCount"></p>
+  <div class="grid" id="closetGrid"></div>
+</section>
+
+<!-- ========== 怎麼穿 ========== -->
+<section id="looks">
+  <p class="eyebrow">Lookbook</p>
+  <h2>怎麼穿</h2>
+  <p class="lead">全部用你現有的單品搭配。標著「你穿過」的是你自己的實拍照，那幾套效果已經被驗證過。</p>
+  <div class="filters">
+    <p class="lab">場合</p><div class="chips" id="lScene"></div>
+    <p class="lab">天氣</p><div class="chips" id="lTemp"></div>
+    <div class="chips"><button class="chip" id="lReal">只看我穿過的</button></div>
+  </div>
+  <p class="count" id="lCount"></p>
+  <div class="looks" id="lookGrid"></div>
+</section>
+
+<!-- ========== 穿搭法則 ========== -->
+<section id="rules">
+  <p class="eyebrow">Style rules</p>
+  <h2>穿搭法則</h2>
+  <p class="lead">衣服是基底，配件是個性。不知道怎麼搭的時候，回來看這一頁。</p>
+
+  <div class="law">
+    <div class="card"><div class="no">01</div><h3>只留一個焦點</h3><p>全身只讓一件衣服「說話」。印花上衣配素色下身；素色洋裝加一條搶眼腰封。</p></div>
+    <div class="card"><div class="no">02</div><h3>三層公式</h3><p>基底（上衣＋下身）＋外套層次（西裝、針織、防曬）＋配件點睛（腰封、皮帶、帽子）。先穿基底照鏡子，覺得少了什麼再加。</p></div>
+    <div class="card"><div class="no">03</div><h3>配件改變風格</h3><p>同一套基底：換腰封是品牌茶會感，換報童帽是街頭休閒感，換皮帶是職場幹練感。</p></div>
+  </div>
+
+  <h3 style="margin-top:36px">兩大衣櫥配方</h3>
+  <div class="twocol">
+    <div class="card" style="padding:20px;border-top:5px solid var(--orange)"><span class="tape" style="background:var(--orange);color:#fff">公式 A・休閒商務</span>
+      <p style="font-size:18px;font-family:var(--serif);margin:12px 0 6px">西裝外套 ＋ 質感內搭 ＋ 修身西裝褲／裙 ＋ 寬矮跟鞋</p>
+      <p class="fitlooks">教練諮詢、演講、品牌活動、重要會議。氣場：專業、信任、領導力。</p></div>
+    <div class="card" style="padding:20px;border-top:5px solid var(--blue)"><span class="tape" style="background:var(--blue);color:#fff">公式 B・完全休閒</span>
+      <p style="font-size:18px;font-family:var(--serif);margin:12px 0 6px">舒適上衣 ＋ 牛仔褲／短褲 ＋ 小白鞋／帆布鞋 ＋ 帽子</p>
+      <p class="fitlooks">週末家庭日、接送小孩、咖啡廳工作、Me Time。氣場：輕鬆、活力、舒適不邋遢。</p></div>
+  </div>
+
+  <h3 style="margin-top:36px">五組色彩公式</h3>
+  <div class="combo">
+    <div class="card"><div class="bar"><i style="background:#9A9A9A"></i><i style="background:#fff"></i></div><div class="t"><b>灰＋白</b>乾淨專業，建立高度信任感</div></div>
+    <div class="card"><div class="bar"><i style="background:var(--red)"></i><i style="background:#fff"></i><i style="background:#8A8A8A"></i></div><div class="t"><b>紅＋白＋灰</b>領導力與溫暖，強烈但不具攻擊性</div></div>
+    <div class="card"><div class="bar"><i style="background:#fff"></i><i style="background:var(--green)"></i><i style="background:var(--camel)"></i></div><div class="t"><b>白＋綠＋駝</b>大地清新，明亮不失專業</div></div>
+    <div class="card"><div class="bar"><i style="background:var(--pink)"></i><i style="background:#C4B5DA"></i><i style="background:#ECECEC"></i></div><div class="t"><b>粉／紫＋白／灰</b>柔和療癒，降低銳利度</div></div>
+    <div class="card"><div class="bar"><i style="background:var(--yellow)"></i><i style="background:var(--orange)"></i><i style="background:#2B3F6B"></i></div><div class="t"><b>黃／橘＋藍</b>經典互補，展現極致活力</div></div>
+  </div>
+
+  <h3 style="margin-top:36px">顏色配搭速查</h3>
+  <div class="tricks" id="colorQuick"></div>
+
+  <h3 style="margin-top:36px">進階四招</h3>
+  <div class="tricks">
+    <div class="card"><img src="assets/items/white_elastic.jpg" alt=""><div><h3>下擺鬆緊設計</h3>芥末黃排釦上衣、黑白印花、白色鬆緊襯衫：上身寬鬆、下擺自然收，下身選素色短褲或短裙最乾淨，不要再配印花。</div></div>
+    <div class="card"><img src="assets/items/crochet.jpg" alt=""><div><h3>蕾絲外套兩種穿法</h3>① 穿在黑色或深色洋裝外，製造層次；② 當夏天遮陽外套，穿在無袖背心外。米白鏤空短版外套透出磚紅色底最好看。</div></div>
+    <div class="card"><img src="assets/items/red_bow.jpg" alt="" style="object-fit:contain"><div><h3>腰封用法</h3>套在寬鬆洋裝外立刻收腰顯身形。紅色＝視覺焦點（白、卡其、淡色洋裝）；駝色＝甜美與同色系延伸（A 字、大地色）。</div></div>
+    <div class="card"><img src="assets/items/newsboy.jpg" alt="" style="object-fit:contain"><div><h3>報童帽加分術</h3>配黑白條紋或格紋有復古街頭感；配素色針織有文藝感。出門前覺得「差一點」，戴上它通常就對了。</div></div>
+  </div>
+
+  <h3 style="margin-top:36px">配件速查</h3>
+  <div class="acc" id="accQuick"></div>
+</section>
+
+<!-- ========== 缺什麼 ========== -->
+<section id="gaps">
+  <p class="eyebrow">Wardrobe diagnostics</p>
+  <h2>缺什麼</h2>
+  <p class="lead">用你自己的色彩計畫、穿搭公式和絕對守則來檢查衣櫥（內衣不列入計算）。</p>
+  <div class="gapgrid">
+    <div class="card" style="padding:20px"><h3>顏色分布</h3><p class="fitlooks" style="margin-top:0">粗體＝色彩計畫的五個主色</p><div class="bars" id="colorBars"></div></div>
+    <div class="card" style="padding:20px"><h3>季節與類別</h3><div class="bars" id="seasonBars"></div><div class="bars" id="catBars" style="margin-top:18px"></div></div>
+  </div>
+  <div class="gapcards" id="gapCards"></div>
+  <h3 style="margin-top:36px">可以考慮斷捨離</h3>
+  <p class="fitlooks">依據「溫柔專業」路線與「合身不緊身」原則；最後決定權在你，猶豫就錄影問 Melony。</p>
+  <div class="gapcards" id="declutter"></div>
+</section>
+
+<!-- ========== 要買什麼 ========== -->
+<section id="shop">
+  <p class="eyebrow">Shopping list</p>
+  <h2>要買什麼</h2>
+  <p class="lead">依優先順序排列。買到了就打勾，會記在這台裝置上。「待買鞋帽」資料夾裡的照片，我已經逐一對照你的守則給了建議。</p>
+  <h3>購買決策流程</h3>
+  <div class="flow">
+    <div class="card">手摸材質舒服嗎？</div><span class="arr">→ 是 →</span>
+    <div class="card">質感優良且合身不緊身嗎？</div><span class="arr">→ 是 →</span>
+    <div class="card" style="background:var(--yellow)">符合色彩計畫嗎？</div><span class="arr">→ 是 →</span>
+    <div class="card" style="background:var(--ink);color:#fff">買入！</div>
+    <div class="fitlooks" style="flex-basis:100%">任何一步是「否」就放棄；猶豫不決就錄影問 Melony，拒絕內耗。</div>
+  </div>
+  <div class="shop" id="shopList"></div>
+</section>
+
+</main>
+
+<footer>即使身邊沒有人，也要呈現喜歡的樣子給自己看。<small>Weekie's Personal Brand &amp; Style Playbook ✦ 與 Melony 形象管理課程一起完成</small></footer>
+
+<div class="modal" id="modal"><div class="mbox"><button class="mx" aria-label="關閉">×</button><div id="mcontent"></div></div></div>
+
+<script src="data.js"></script>
+<script>
+(function(){
+const D=window.WARDROBE, $=s=>document.querySelector(s);
+const byK=Object.fromEntries(D.items.map(i=>[i.k,i]));
+const scene=Object.fromEntries(D.scenes.map(s=>[s.id,s]));
+const TEMPS=[["hot","☀️ 炎熱"],["mild","🌤 舒適"],["cool","🍂 微涼"]];
+const tempName=Object.fromEntries(TEMPS);
+const CG={"米白":"#F1EBDD","粉":"#E9B4AE","橘":"#E8913A","藍":"#7FA3C6","黃":"#F2CF4A","紅":"#C8463D","綠":"#7E8B5E","大地":"#B98A57","灰":"#A8A39C","黑":"#2E2A26"};
+const PLAN=["米白","粉","橘","藍","黃"];
+const store={get(k,d){try{return JSON.parse(localStorage.getItem('wk_'+k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem('wk_'+k,JSON.stringify(v))}catch(e){}}};
+const clothes=D.items.filter(i=>i.c!=="內衣");
+const useCount={}; D.looks.forEach(l=>l.items.forEach(k=>useCount[k]=(useCount[k]||0)+1));
+const img=(i,cls='')=>`<img loading="lazy" class="${cls}" src="${i.img}" style="object-position:${i.pos} 50%" alt="${i.n}">`;
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function chips(el,opts,cur,on){el.innerHTML=opts.map(([v,t])=>`<button class="chip${v===cur?' on':''}" data-v="${v}">${t}</button>`).join('');
+  el.onclick=e=>{const b=e.target.closest('button');if(!b)return;el.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));on(b.dataset.v)}}
+const sceneTag=s=>`<span class="tape" style="background:${scene[s].color};color:#fff">${scene[s].name}</span>`;
+
+/* stats */
+const looksReal=D.looks.filter(l=>l.real).length;
+$('#stats').innerHTML=[[clothes.length,'件衣服與配件'],[D.looks.length,'套穿搭'],[clothes.filter(i=>i.g).length,'件女神單品'],[looksReal,'套你穿過的實拍']].map(([n,t])=>`<div class="stat"><b>${n}</b><span>${t}</span></div>`).join('');
+
+/* look card */
+function visual(l,big){
+  const its=l.items.map(k=>byK[k]);
+  if(l.photo){
+    const side=its.slice(0,3).map(i=>img(i)).join('');
+    return `<div class="vis ph" data-look="${l.id}"><img loading="lazy" class="phimg" src="${l.photo}" alt="${l.name}">${l.real?'<span class="real">你穿過</span>':'<span class="real" style="background:var(--mute)">實拍參考</span>'}<div class="side">${side}</div></div>`;
+  }
+  const n=its.length, c=n<=2?'c2':(n===3?'c3':'c2');
+  return `<div class="vis ${c}" data-look="${l.id}">${its.slice(0,4).map(i=>img(i)).join('')}</div>`;
+}
+function lookCard(l){
+  return `<article class="card look">${visual(l)}<div class="b"><div class="top"><h3>${l.name}</h3>${sceneTag(l.scene)}</div>
+  <div class="its">${l.items.map(k=>byK[k].n).join('＋')}</div><p class="why">${l.why}</p>
+  <div class="temps">${l.temps.map(t=>tempName[t]).join('　')}${l.photoNote?'　・'+l.photoNote:''}</div></div></article>`;
+}
+document.addEventListener('click',e=>{
+  const v=e.target.closest('[data-look]'); if(v){openLook(v.dataset.look);return}
+  const it=e.target.closest('[data-item]'); if(it){openItem(it.dataset.item);return}
+});
+
+/* today */
+let tS='coach', tT=guessTemp();
+function guessTemp(){const m=new Date().getMonth()+1;return (m>=5&&m<=10)?'hot':(m===11||m===3||m===4)?'mild':'cool'}
+chips($('#tScene'),D.scenes.map(s=>[s.id,s.name]),tS,v=>{tS=v;renderToday()});
+chips($('#tTemp'),TEMPS,tT,v=>{tT=v;renderToday()});
+function pool(s,t){let p=D.looks.filter(l=>l.scene===s&&l.temps.includes(t));if(p.length<3)p=p.concat(D.looks.filter(l=>l.scene===s&&!p.includes(l)));return p}
+function renderToday(){const p=shuffle(pool(tS,tT)).sort((a,b)=>(b.temps.includes(tT))-(a.temps.includes(tT))).slice(0,3);$('#todayOut').innerHTML=p.map(lookCard).join('')}
+$('#reroll').onclick=renderToday; renderToday();
+
+/* week */
+let wT=store.get('wtemp',guessTemp()), week=store.get('week',null);
+function pick(s,t,avoid){const p=pool(s,t).filter(l=>!avoid.includes(l.id));return (p.length?shuffle(p):shuffle(pool(s,t)))[0].id}
+if(!week||week.length!==7){week=[];D.week.forEach(d=>week.push({scene:d.scene,look:pick(d.scene,wT,week.map(w=>w.look))}))}
+chips($('#wTemp'),TEMPS.map(([v,t])=>[v,'這週天氣 '+t]),wT,v=>{wT=v;store.set('wtemp',v);week.forEach((w,i)=>w.look=pick(w.scene,wT,week.slice(0,i).map(x=>x.look)));saveWeek()});
+function saveWeek(){store.set('week',week);renderWeek()}
+function renderWeek(){
+  $('#week').innerHTML=week.map((w,i)=>{const l=D.looks.find(x=>x.id===w.look)||D.looks[0];const d=D.week[i];
+    return `<div class="card day"><h4>${d.day}</h4><select data-i="${i}">${D.scenes.map(s=>`<option value="${s.id}"${s.id===w.scene?' selected':''}>${s.name}</option>`).join('')}</select>
+    <div class="mini" data-look="${l.id}">${l.items.slice(0,4).map(k=>img(byK[k])).join('')}</div>
+    <div class="nm" data-look="${l.id}">${l.name}</div><button class="re" data-i="${i}">↻ 換一套</button></div>`}).join('');
+}
+$('#week').addEventListener('change',e=>{const i=+e.target.dataset.i;week[i].scene=e.target.value;week[i].look=pick(e.target.value,wT,week.map(w=>w.look));saveWeek()});
+$('#week').addEventListener('click',e=>{const b=e.target.closest('.re');if(!b)return;const i=+b.dataset.i;week[i].look=pick(week[i].scene,wT,week.map(w=>w.look));saveWeek()});
+renderWeek();
+
+/* closet */
+const CATS=["外套","針織","上衣","洋裝","裙褲","長褲","運動","配件","鞋子","內衣"];
+const catName={"裙褲":"裙子・短褲"};
+let fC='all', fCol='all', fSea='all';
+chips($('#fCat'),[['all','全部'],['g','✦ 女神單品'],...CATS.map(c=>[c,catName[c]||c])],fC,v=>{fC=v;renderCloset()});
+chips($('#fColor'),[['all','全部'],...Object.keys(CG).map(c=>[c,`<span class="dot" style="background:${CG[c]}"></span>${c}`])],fCol,v=>{fCol=v;renderCloset()});
+chips($('#fSeason'),[['all','全部'],['warm','春夏'],['coolS','秋冬'],['zero','還沒被搭配的']],fSea,v=>{fSea=v;renderCloset()});
+function renderCloset(){
+  let a=D.items.filter(i=>(fC==='all'?i.c!=='內衣':fC==='g'?i.g:i.c===fC)&&(fCol==='all'||i.cg===fCol)
+   &&(fSea==='all'||(fSea==='warm'&&/[春夏]|四季/.test(i.s))||(fSea==='coolS'&&/[秋冬]|四季/.test(i.s))||(fSea==='zero'&&!useCount[i.k]&&i.c!=='內衣')));
+  $('#cCount').textContent=`共 ${a.length} 件`;
+  $('#closetGrid').innerHTML=a.map(i=>`<div class="card item" data-item="${i.k}">${img(i)}<div class="b"><div class="n">${i.n}</div>
+   <div class="m"><span><span class="dot" style="background:${CG[i.cg]}"></span>${i.s}</span>${i.c==='內衣'?'':`<span class="${useCount[i.k]?'':'zero'}">${useCount[i.k]||0} 套</span>`}</div>${i.g?'<div class="gd">✦ 女神單品</div>':''}</div></div>`).join('');
+}
+renderCloset();
+
+/* looks */
+let lS='all', lT='all', lR=false;
+chips($('#lScene'),[['all','全部'],...D.scenes.map(s=>[s.id,s.name])],lS,v=>{lS=v;renderLooks()});
+chips($('#lTemp'),[['all','全部'],...TEMPS],lT,v=>{lT=v;renderLooks()});
+$('#lReal').onclick=e=>{lR=!lR;e.target.classList.toggle('on',lR);renderLooks()};
+function renderLooks(){const a=D.looks.filter(l=>(lS==='all'||l.scene===lS)&&(lT==='all'||l.temps.includes(lT))&&(!lR||l.photo));
+  $('#lCount').textContent=`共 ${a.length} 套`;$('#lookGrid').innerHTML=a.map(lookCard).join('')}
+renderLooks();
+
+/* rules: color quick + accessories */
+const CQ=[["黑色萬能配","black_c_shorts","黑色配任何顏色都不出錯。不確定時，下身選黑色。"],["白色清爽底","white_elastic","白色上衣是所有下身的好朋友：牛仔裙、印花短褲、千鳥格褲裙都能配。"],
+["大地色系互搭","mustard_tee","芥末黃＋咖啡色＋米白＝溫暖質感組合。"],["綠色玩跳色","green_eyelet","亮綠配黑或深咖啡下身，讓綠色當主角。"],
+["磚紅暖感配","brick_rib","磚紅配千鳥格或黑色，溫暖又時髦的撞色。"],["藍色百搭法","navy_floral","牛仔藍配任何顏色；深海軍藍配米白或粉色是品牌形象的好選擇。"]];
+$('#colorQuick').innerHTML=CQ.map(([t,k,d])=>`<div class="card" data-item="${k}" style="cursor:pointer">${img(byK[k])}<div><h3>${t}</h3>${d}</div></div>`).join('');
+$('#accQuick').innerHTML=D.items.filter(i=>i.c==='配件').map(i=>`<div class="card" data-item="${i.k}" style="cursor:pointer">${img(i)}<b>${i.n}</b><div class="fitlooks">${i.note}</div></div>`).join('');
+
+/* gaps */
+function bars(el,rows,max,keyset){el.innerHTML=rows.map(([k,n,c])=>`<div class="row${keyset&&keyset.includes(k)?' key':''}"><span>${k}</span><div class="tr"><i style="width:${Math.max(3,n/max*100)}%;background:${c}"></i></div><span>${n}</span></div>`).join('')}
+const cc={};clothes.forEach(i=>cc[i.cg]=(cc[i.cg]||0)+1);
+const colRows=Object.keys(CG).map(k=>[k,cc[k]||0,CG[k]==="#F1EBDD"?"#D9CDB5":CG[k]]).sort((a,b)=>b[1]-a[1]);
+bars($('#colorBars'),colRows,Math.max(...colRows.map(r=>r[1])),PLAN);
+const warm=clothes.filter(i=>/[春夏]|四季/.test(i.s)).length, coolN=clothes.filter(i=>/[秋冬]|四季/.test(i.s)).length;
+const lk=t=>D.looks.filter(l=>l.temps.includes(t)).length;
+bars($('#seasonBars'),[["春夏單品",warm,'#E8913A'],["秋冬單品",coolN,'#7FA3C6'],["炎熱穿搭",lk('hot'),'#F2CF4A'],["舒適穿搭",lk('mild'),'#B98A57'],["微涼穿搭",lk('cool'),'#5E6E8C']],Math.max(warm,coolN));
+const catc={};clothes.forEach(i=>catc[i.c]=(catc[i.c]||0)+1);
+bars($('#catBars'),CATS.filter(c=>c!=='內衣').map(c=>[catName[c]||c,catc[c]||0,'#A8A39C']),Math.max(...Object.values(catc)));
+const shoes=catc['鞋子']||0, black=cc['黑']||0;
+const GAPS=[
+ [false,'鞋子只有 '+shoes+' 雙',`守則要「黑／白／米寬矮跟鞋＋隨身平底鞋」，休閒公式也要小白鞋。目前只有洞洞鞋，是全衣櫥最大的缺口。`],
+ [false,'亮色絲巾 0 條','願景圖寫「持續練習亮色系絲巾搭配」。橘、黃、藍各一條，就能把黑白灰單品全部點亮。'],
+ [false,'沒有長版大衣',`秋冬單品 ${coolN} 件、微涼穿搭只有 ${lk('cool')} 套，比夏天少很多。一件駝色或米色大衣能直接升級所有秋冬造型。`],
+ [false,'公式 A 指定單品缺 2 件','願景圖寫明的「質感 Logo T／橫條紋棉 T」和「質感綠色褲裙」目前都沒有。'],
+ [false,`橘 ${cc['橘']||0} 件・黃 ${cc['黃']||0} 件`,`色彩計畫的五個主色裡，橘和黃最少（橘紅背心、橘色西裝褲、芥末黃上衣與開襟）。先用絲巾、腰封這類小單品補，之後買新衣優先挑橘、黃。`],
+ [false,`黑色 ${black} 件`,`黑色好搭但不在色彩計畫裡，數量卻是第二多。穿黑色時，用米白蕾絲、紅腰封或亮色絲巾加一個暖色焦點。`],
+ [true,'西裝外套已經很夠','紅、白、橄欖綠、淺灰短版四件西裝，加上米白蕾絲短版外套。公式 A 的骨架已經完整，不用再買西裝。'],
+ [false,'包包與項鏈還沒建檔','守則提到真皮側背包、精緻項鏈，但衣物庫裡沒有照片。之後拍照補進來，就能一起規劃。'],
+ [true,'洋裝 17 件很豐富','單穿就完整的洋裝很多，配腰封、皮帶、外套就能變出不同場合。'],
+];
+$('#gapCards').innerHTML=GAPS.map(([ok,t,d])=>`<div class="card gap${ok?' ok':''}"><div class="st">${ok?'✓ 已經很好':'△ 需要補強'}</div><h3>${t}</h3><p>${d}</p></div>`).join('');
+$('#declutter').innerHTML=D.declutter.map(d=>{const i=byK[d.k];return `<div class="card dec" data-item="${i.k}" style="cursor:pointer">${img(i)}<div><b>${i.n}</b><div class="fitlooks">${d.why}</div></div></div>`}).join('');
+
+/* shop */
+const bought=store.get('bought',{});
+const priColor={1:'var(--red)',2:'var(--orange)',3:'var(--blue)'};
+function renderShop(){
+ $('#shopList').innerHTML=D.shop.map((s,i)=>`<div class="card sh${bought[i]?' done':''}"><div class="pri" style="background:${priColor[s.pri]}">${s.pri}</div><div>
+  <h3><span>${s.name}</span><label><input type="checkbox" data-b="${i}"${bought[i]?' checked':''}> 買到了</label></h3>
+  <div style="font-size:14px">${s.why}</div>
+  <div class="fitlooks" style="margin-top:6px">買了可以穿：${s.fits.map(id=>{const l=D.looks.find(x=>x.id===id);return `<a data-look="${id}">${l.name}</a>`}).join('、')}</div>
+  ${s.cands.length?`<div class="cands">${s.cands.map(c=>{const x=D.cands[c];return `<div class="cand"><img loading="lazy" src="assets/shop/${c}.jpg" alt="${x.name}"><div class="b"><span class="v ${x.verdict}">${x.verdict}</span> <b>${x.name}</b><div class="fitlooks">${x.note}</div></div></div>`}).join('')}</div>`:''}
+ </div></div>`).join('');
+}
+$('#shopList').addEventListener('change',e=>{const i=e.target.dataset.b;if(i==null)return;bought[i]=e.target.checked;store.set('bought',bought);renderShop()});
+renderShop();
+
+/* modal */
+const modal=$('#modal');
+function show(html){$('#mcontent').innerHTML=html;modal.classList.add('on');document.body.style.overflow='hidden';modal.scrollTop=0}
+function close(){modal.classList.remove('on');document.body.style.overflow=''}
+modal.addEventListener('click',e=>{if(e.target===modal||e.target.closest('.mx'))close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+function miniLook(l){return `<div class="ml" data-look="${l.id}"><div class="g">${l.items.slice(0,4).map(k=>img(byK[k])).join('')}</div><div class="t">${l.name}</div></div>`}
+function openItem(k){const i=byK[k];const ls=D.looks.filter(l=>l.items.includes(k));const sw=D.swaps[k];
+ show(`<div class="mhead">${img(i)}<div class="b"><p class="eyebrow">${catName[i.c]||i.c}</p><h2 style="font-size:28px">${i.n}</h2>${i.g?'<div class="gd">✦ 女神單品：剪裁精緻、質感佳、能瞬間提升氣場</div>':''}
+ <dl class="kv"><dt>顏色</dt><dd><span class="dot" style="background:${CG[i.cg]}"></span>${i.cg}${PLAN.includes(i.cg)?'（色彩計畫主色）':''}</dd><dt>季節</dt><dd>${i.s}</dd><dt>正式程度</dt><dd>${i.f}</dd><dt>出現在</dt><dd>${ls.length} 套穿搭</dd></dl>
+ ${i.note?`<p style="font-size:15px">💡 ${i.note}</p>`:''}</div></div>
+ <div class="mbody">${sw?`<h3 style="margin-top:18px">替換指南：同一件，換底穿出不同感覺</h3><p class="fitlooks">選下身原則：${sw.rule}</p><div class="swap"><ul>${sw.opts.map(o=>`<li><span class="stars">${'★'.repeat(o.stars)}${'☆'.repeat(3-o.stars)}</span> <a data-item="${o.k}" style="cursor:pointer;text-decoration:underline">${byK[o.k].n}</a>：${o.t}</li>`).join('')}</ul></div>`:''}
+ ${ls.length?`<h3 style="margin-top:18px">可以這樣穿</h3><div class="minilooks">${ls.map(miniLook).join('')}</div>`:(i.c==='內衣'?'':'<p class="fitlooks">這件還沒有被搭配到，可以考慮是否斷捨離。</p>')}</div>`);
+}
+function openLook(id){const l=D.looks.find(x=>x.id===id);
+ show(`<div class="lookmodal">${l.photo?`<div class="mhead"><img src="${l.photo}" style="object-position:top" alt=""><div class="b">`:'<div class="mbody" style="padding-top:24px"><div>'}
+ <p class="eyebrow">${scene[l.scene].name}</p><h2 style="font-size:30px">${l.name}</h2>${l.real?'<p><span class="real" style="position:static">你穿過這套</span></p>':''}
+ <p style="font-size:16px">${l.why}</p><p class="temps">${l.temps.map(t=>tempName[t]).join('　')}${l.photoNote?'<br>'+l.photoNote:''}</p></div></div>
+ <div class="mbody"><h3 style="margin-top:16px">這套用到的單品</h3><div class="pieces">${l.items.map(k=>{const i=byK[k];return `<div class="card item" data-item="${k}">${img(i)}<div class="b"><div class="n">${i.n}</div></div></div>`}).join('')}</div></div></div>`);
+}
+
+/* nav highlight */
+const links=[...document.querySelectorAll('.nav a')];
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section').forEach(s=>obs.observe(s));
+})();
+</script>
+</body>
+</html>
