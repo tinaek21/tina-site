@@ -126,6 +126,14 @@ h3{font-family:var(--serif);margin:0 0 8px}
 .look .why{font-size:14px;margin:0}
 .temps{font-size:12px;color:var(--mute)}
 
+/* diary */
+.diary{columns:4 220px;column-gap:14px}
+.dy{break-inside:avoid;margin:0 0 14px;background:#fff;padding:8px 8px 10px;box-shadow:0 6px 18px rgba(60,40,20,.10);position:relative}
+.dy:nth-child(3n+1){transform:rotate(-1deg)} .dy:nth-child(3n+2){transform:rotate(.8deg)}
+.dy img{width:100%;display:block}
+.dy .cap{font-family:var(--hand);font-size:19px;color:var(--mute);text-align:center;margin-top:6px;line-height:1.2}
+.dy[data-look]{cursor:pointer}
+.dy[data-look]:hover{transform:rotate(0) translateY(-3px)}
 /* rules */
 .law{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .law .card{padding:20px}
@@ -221,7 +229,7 @@ footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mu
 
 <nav class="nav"><div class="nav-in">
   <div class="brand">Tina<small>style atlas</small></div>
-  <a href="#me">我是誰</a><a href="#today">今天穿什麼</a><a href="#closet">我有什麼</a><a href="#looks">怎麼穿</a>
+  <a href="#me">我是誰</a><a href="#today">今天穿什麼</a><a href="#closet">我有什麼</a><a href="#looks">怎麼穿</a><a href="#diary">穿搭日記</a>
   <a href="#rules">穿搭法則</a><a href="#gaps">缺什麼</a><a href="#shop">要買什麼</a>
 </div></nav>
 
@@ -249,9 +257,9 @@ footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mu
 
   <h3 style="margin-top:32px">三個角色，一個我</h3>
   <div class="roles">
-    <div class="card role"><img src="assets/me/olive2.jpg" alt=""><div class="b"><span class="tape" style="background:var(--pink)">品牌行銷教練</span><p class="kw">洞察力・說服力・值得信任</p><div>幫助創業者將夢想變成可持續發展的事業。</div></div></div>
-    <div class="card role"><img src="assets/me/cream.jpg" alt=""><div class="b"><span class="tape" style="background:var(--blue);color:#fff">關係教練</span><p class="kw">高度同理心・溫和有力・療癒感</p><div>賦予人們理解自他的能力，建立穩固滿足的連結。</div></div></div>
-    <div class="card role"><img src="assets/me/fun.jpg" alt=""><div class="b"><span class="tape" style="background:var(--orange);color:#fff">溫暖的角色</span><p class="kw">媽咪・太太・女性自我</p><div>溫暖有趣、被愛包圍、充滿生命力。</div></div></div>
+    <div class="card role"><img src="assets/me/r05.jpg" alt="橄欖綠西裝外套出席活動"><div class="b"><span class="tape" style="background:var(--pink)">品牌行銷教練</span><p class="kw">洞察力・說服力・值得信任</p><div>幫助創業者將夢想變成可持續發展的事業。</div></div></div>
+    <div class="card role"><img src="assets/me/r16.jpg" alt="一對一諮詢"><div class="b"><span class="tape" style="background:var(--blue);color:#fff">關係教練</span><p class="kw">高度同理心・溫和有力・療癒感</p><div>賦予人們理解自他的能力，建立穩固滿足的連結。</div></div></div>
+    <div class="card role"><img src="assets/me/r15.jpg" alt="週末輕鬆穿搭"><div class="b"><span class="tape" style="background:var(--orange);color:#fff">溫暖的角色</span><p class="kw">媽咪・太太・女性自我</p><div>溫暖有趣、被愛包圍、充滿生命力。</div></div></div>
   </div>
 
   <h3 style="margin-top:40px">我的色彩計畫</h3>
@@ -330,6 +338,14 @@ footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mu
   </div>
   <p class="count" id="lCount"></p>
   <div class="looks" id="lookGrid"></div>
+</section>
+
+<!-- ========== 穿搭日記 ========== -->
+<section id="diary">
+  <p class="eyebrow">Style diary</p>
+  <h2>穿搭日記</h2>
+  <p class="lead">這些都是你真的穿出門的樣子。點照片可以看那一套用了哪些單品。之後每拍一張鏡子照，就可以放進來。</p>
+  <div class="diary" id="diaryWall"></div>
 </section>
 
 <!-- ========== 穿搭法則 ========== -->
@@ -508,6 +524,9 @@ function renderLooks(){const a=D.looks.filter(l=>(lS==='all'||l.scene===lS)&&(lT
   $('#lCount').textContent=`共 ${a.length} 套`;$('#lookGrid').innerHTML=a.map(lookCard).join('')}
 renderLooks();
 
+/* diary */
+$('#diaryWall').innerHTML=D.diary.map(x=>`<figure class="dy"${x.look?` data-look="${x.look}"`:''}><img loading="lazy" src="${x.p}" alt="${x.c}"><figcaption class="cap">${x.c}</figcaption></figure>`).join('');
+
 /* rules: color quick + accessories */
 const CQ=[["黑色萬能配","black_c_shorts","黑色配任何顏色都不出錯。不確定時，下身選黑色。"],["白色清爽底","white_elastic","白色上衣是所有下身的好朋友：牛仔裙、印花短褲、千鳥格褲裙都能配。"],
 ["大地色系互搭","mustard_tee","芥末黃＋咖啡色＋米白＝溫暖質感組合。"],["綠色玩跳色","green_eyelet","亮綠配黑或深咖啡下身，讓綠色當主角。"],
@@ -527,14 +546,15 @@ const catc={};clothes.forEach(i=>catc[i.c]=(catc[i.c]||0)+1);
 bars($('#catBars'),CATS.filter(c=>c!=='內衣').map(c=>[catName[c]||c,catc[c]||0,'#A8A39C']),Math.max(...Object.values(catc)));
 const shoes=catc['鞋子']||0, black=cc['黑']||0;
 const GAPS=[
- [false,'鞋子只有 '+shoes+' 雙',`守則要「黑／白／米寬矮跟鞋＋隨身平底鞋」，休閒公式也要小白鞋。目前只有洞洞鞋，是全衣櫥最大的缺口。`],
+ [false,'缺經典寬矮跟鞋',`實拍照裡看得到你有小白鞋和草編平底鞋（還沒建檔），休閒公式沒問題。但守則要的「黑／白／米寬矮跟鞋」在所有照片裡都沒出現，這是公式 A 最大的缺口。`],
  [false,'亮色絲巾 0 條','願景圖寫「持續練習亮色系絲巾搭配」。橘、黃、藍各一條，就能把黑白灰單品全部點亮。'],
  [false,'沒有長版大衣',`秋冬單品 ${coolN} 件、微涼穿搭只有 ${lk('cool')} 套，比夏天少很多。一件駝色或米色大衣能直接升級所有秋冬造型。`],
- [false,'公式 A 指定單品缺 2 件','願景圖寫明的「質感 Logo T／橫條紋棉 T」和「質感綠色褲裙」目前都沒有。'],
+ [false,'公式 A 指定單品缺 2 件','Logo T 你其實有（LIMONI 印花白 T）；還缺的是「橫條紋棉 T」和「質感綠色褲裙」。'],
  [false,`橘 ${cc['橘']||0} 件・黃 ${cc['黃']||0} 件`,`色彩計畫的五個主色裡，橘和黃最少（橘紅背心、橘色西裝褲、芥末黃上衣與開襟）。先用絲巾、腰封這類小單品補，之後買新衣優先挑橘、黃。`],
  [false,`黑色 ${black} 件`,`黑色好搭但不在色彩計畫裡，數量卻是第二多。穿黑色時，用米白蕾絲、紅腰封或亮色絲巾加一個暖色焦點。`],
  [true,'西裝外套已經很夠','紅、白、橄欖綠、淺灰短版四件西裝，加上米白蕾絲短版外套。公式 A 的骨架已經完整，不用再買西裝。'],
  [false,'包包與項鏈還沒建檔','守則提到真皮側背包、精緻項鏈，但衣物庫裡沒有照片。之後拍照補進來，就能一起規劃。'],
+ [false,'照片裡有、衣物庫還沒有',`${D.unlisted.join('、')}。補拍建檔後，網站的穿搭和缺口分析會更準。`],
  [true,'洋裝 17 件很豐富','單穿就完整的洋裝很多，配腰封、皮帶、外套就能變出不同場合。'],
 ];
 $('#gapCards').innerHTML=GAPS.map(([ok,t,d])=>`<div class="card gap${ok?' ok':''}"><div class="st">${ok?'✓ 已經很好':'△ 需要補強'}</div><h3>${t}</h3><p>${d}</p></div>`).join('');
