@@ -1,4 +1,4 @@
-# Weekie 的衣櫥與穿搭規劃
+# Tina 的衣櫥與穿搭規劃
 
 網址：https://tina.shesay.com
 
