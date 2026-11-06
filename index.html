@@ -134,6 +134,16 @@ h3{font-family:var(--serif);margin:0 0 8px}
 .dy .cap{font-family:var(--hand);font-size:19px;color:var(--mute);text-align:center;margin-top:6px;line-height:1.2}
 .dy[data-look]{cursor:pointer}
 .dy[data-look]:hover{transform:rotate(0) translateY(-3px)}
+/* gone */
+.gone{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.gi{overflow:hidden;background:#F1ECE4}
+.gi .top{display:flex;gap:12px;padding:14px;align-items:center}
+.gi .top img{width:96px;height:96px;object-fit:cover;border-radius:8px;filter:grayscale(.35);opacity:.9;background:#fff}
+.gi h3{font-size:17px;margin:0}
+.gi .meta{font-size:12px;color:var(--mute)}
+.gi .ph{display:grid;grid-template-columns:repeat(2,1fr);gap:4px;padding:0 14px}
+.gi .ph img{aspect-ratio:3/4;object-fit:cover;width:100%;border-radius:6px;filter:grayscale(.2)}
+.gi .thx{font-family:var(--hand);font-size:20px;color:var(--mute);padding:8px 14px 14px}
 /* rules */
 .law{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .law .card{padding:20px}
@@ -230,7 +240,7 @@ footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mu
 <nav class="nav"><div class="nav-in">
   <div class="brand">Tina<small>style atlas</small></div>
   <a href="#me">我是誰</a><a href="#today">今天穿什麼</a><a href="#closet">我有什麼</a><a href="#looks">怎麼穿</a><a href="#diary">穿搭日記</a>
-  <a href="#rules">穿搭法則</a><a href="#gaps">缺什麼</a><a href="#shop">要買什麼</a>
+  <a href="#rules">穿搭法則</a><a href="#gaps">缺什麼</a><a href="#shop">要買什麼</a><a href="#gone">已斷捨離</a>
 </div></nav>
 
 <main class="wrap">
@@ -425,6 +435,15 @@ footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mu
   <div class="shop" id="shopList"></div>
 </section>
 
+<!-- ========== 已斷捨離 ========== -->
+<section id="gone">
+  <p class="eyebrow">Let go with thanks</p>
+  <h2>已斷捨離</h2>
+  <p class="lead">這些衣服陪你走過一段，已經功成身退。留下穿著它們的樣子，記得哪些版型和顏色適合你，下次選衣服時更有方向。</p>
+  <p class="count" id="goneCount"></p>
+  <div class="gone" id="goneGrid"></div>
+</section>
+
 </main>
 
 <footer>即使身邊沒有人，也要呈現喜歡的樣子給自己看。<small>Tina's Personal Brand &amp; Style Playbook ✦ 與 Melony 形象管理課程一起完成</small></footer>
@@ -486,6 +505,7 @@ $('#reroll').onclick=renderToday; renderToday();
 /* week */
 let wT=store.get('wtemp',guessTemp()), week=store.get('week',null);
 function pick(s,t,avoid){const p=pool(s,t).filter(l=>!avoid.includes(l.id));return (p.length?shuffle(p):shuffle(pool(s,t)))[0].id}
+if(week&&week.length===7)week.forEach(w=>{if(!D.looks.find(l=>l.id===w.look))w.look=pick(w.scene,wT,[])});
 if(!week||week.length!==7){week=[];D.week.forEach(d=>week.push({scene:d.scene,look:pick(d.scene,wT,week.map(w=>w.look))}))}
 chips($('#wTemp'),TEMPS.map(([v,t])=>[v,'這週天氣 '+t]),wT,v=>{wT=v;store.set('wtemp',v);week.forEach((w,i)=>w.look=pick(w.scene,wT,week.slice(0,i).map(x=>x.look)));saveWeek()});
 function saveWeek(){store.set('week',week);renderWeek()}
@@ -527,10 +547,15 @@ renderLooks();
 /* diary */
 $('#diaryWall').innerHTML=D.diary.map(x=>`<figure class="dy"${x.look?` data-look="${x.look}"`:''}><img loading="lazy" src="${x.p}" alt="${x.c}"><figcaption class="cap">${x.c}</figcaption></figure>`).join('');
 
+/* gone */
+$('#goneCount').textContent=`共 ${D.gone.length} 件・2026 年 11 月`;
+$('#goneGrid').innerHTML=D.gone.map(g=>`<div class="card gi"><div class="top"><img loading="lazy" src="${g.img}" alt="${g.n}"><div><h3>${g.n}</h3><div class="meta">${catName[g.c]||g.c}・${g.date} 斷捨離</div>${g.looks.length?`<div class="meta">曾經搭過：${g.looks.join('、')}</div>`:''}</div></div>
+ ${g.photos.length?`<div class="ph">${g.photos.map(p=>`<img loading="lazy" src="${p}" alt="穿著${g.n}">`).join('')}</div>`:''}<div class="thx">謝謝你的陪伴 ✦</div></div>`).join('');
+
 /* rules: color quick + accessories */
 const CQ=[["黑色萬能配","black_c_shorts","黑色配任何顏色都不出錯。不確定時，下身選黑色。"],["白色清爽底","white_elastic","白色上衣是所有下身的好朋友：牛仔裙、印花短褲、千鳥格褲裙都能配。"],
 ["大地色系互搭","mustard_tee","芥末黃＋咖啡色＋米白＝溫暖質感組合。"],["綠色玩跳色","green_eyelet","亮綠配黑或深咖啡下身，讓綠色當主角。"],
-["磚紅暖感配","brick_rib","磚紅配千鳥格或黑色，溫暖又時髦的撞色。"],["藍色百搭法","navy_floral","牛仔藍配任何顏色；深海軍藍配米白或粉色是品牌形象的好選擇。"]];
+["磚紅暖感配","brick_rib","磚紅配千鳥格或黑色，溫暖又時髦的撞色。"],["藍色百搭法","stripe_shirt","牛仔藍、藍白條紋配任何顏色都順；深海軍藍配米白或粉色是品牌形象的好選擇。"]];
 $('#colorQuick').innerHTML=CQ.map(([t,k,d])=>`<div class="card" data-item="${k}" style="cursor:pointer">${img(byK[k])}<div><h3>${t}</h3>${d}</div></div>`).join('');
 $('#accQuick').innerHTML=D.items.filter(i=>i.c==='配件').map(i=>`<div class="card" data-item="${i.k}" style="cursor:pointer">${img(i)}<b>${i.n}</b><div class="fitlooks">${i.note}</div></div>`).join('');
 
