@@ -118,6 +118,8 @@ h3{font-family:var(--serif);margin:0 0 8px}
 .look .vis img{width:100%;height:100%;object-fit:cover;aspect-ratio:1}
 .look .vis .phimg{grid-row:span 3;aspect-ratio:auto;height:100%;object-position:top}
 .look .vis .side{display:grid;gap:3px}
+.real.sim{background:#B98A57}
+.core{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--orange);border-radius:99px;padding:1px 8px;margin-left:6px;vertical-align:3px}
 .real{position:absolute;left:10px;top:10px;background:var(--ink);color:#fff;font-size:12px;padding:3px 10px;border-radius:999px}
 .look .b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
 .look .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
@@ -340,11 +342,11 @@ footer small{display:block;font-family:var(--sans);font-size:13px;color:var(--mu
 <section id="looks">
   <p class="eyebrow">Lookbook</p>
   <h2>怎麼穿</h2>
-  <p class="lead">全部用你現有的單品搭配。標著「你穿過」的是你自己的實拍照，那幾套效果已經被驗證過。</p>
+  <p class="lead">全部用你現有的單品搭配。「你穿過」是你自己的實拍照，效果已經被驗證；「AI 模擬」是依照你的身形畫的示意圖，用來判斷比例，實際穿上拍了照，就會換成你的實拍。</p>
   <div class="filters">
     <p class="lab">場合</p><div class="chips" id="lScene"></div>
     <p class="lab">天氣</p><div class="chips" id="lTemp"></div>
-    <div class="chips"><button class="chip" id="lReal">只看我穿過的</button></div>
+    <div class="chips"><button class="chip" id="lCore">核心 20 套</button><button class="chip" id="lReal">只看我穿過的</button></div>
   </div>
   <p class="count" id="lCount"></p>
   <div class="looks" id="lookGrid"></div>
@@ -476,15 +478,16 @@ $('#stats').innerHTML=[[clothes.length,'件衣服與配件'],[D.looks.length,'�
 /* look card */
 function visual(l,big){
   const its=l.items.map(k=>byK[k]);
-  if(l.photo){
+  if(l.photo||l.sim){
     const side=its.slice(0,3).map(i=>img(i)).join('');
-    return `<div class="vis ph" data-look="${l.id}"><img loading="lazy" class="phimg" src="${l.photo}" alt="${l.name}">${l.real?'<span class="real">你穿過</span>':'<span class="real" style="background:var(--mute)">實拍參考</span>'}<div class="side">${side}</div></div>`;
+    const badge=l.photo?(l.real?'<span class="real">你穿過</span>':'<span class="real" style="background:var(--mute)">實拍參考</span>'):'<span class="real sim">AI 模擬</span>';
+    return `<div class="vis ph" data-look="${l.id}"><img loading="lazy" class="phimg" src="${l.photo||l.sim}" alt="${l.name}">${badge}<div class="side">${side}</div></div>`;
   }
   const n=its.length, c=n<=2?'c2':(n===3?'c3':'c2');
   return `<div class="vis ${c}" data-look="${l.id}">${its.slice(0,4).map(i=>img(i)).join('')}</div>`;
 }
 function lookCard(l){
-  return `<article class="card look">${visual(l)}<div class="b"><div class="top"><h3>${l.name}</h3>${sceneTag(l.scene)}</div>
+  return `<article class="card look">${visual(l)}<div class="b"><div class="top"><h3>${l.name}${l.core?'<span class="core">核心</span>':''}</h3>${sceneTag(l.scene)}</div>
   <div class="its">${l.items.map(k=>byK[k].n).join('＋')}</div><p class="why">${l.why}</p>
   <div class="temps">${l.temps.map(t=>tempName[t]).join('　')}${l.photoNote?'　・'+l.photoNote:''}</div></div></article>`;
 }
@@ -499,7 +502,7 @@ function guessTemp(){const m=new Date().getMonth()+1;return (m>=5&&m<=10)?'hot':
 chips($('#tScene'),D.scenes.map(s=>[s.id,s.name]),tS,v=>{tS=v;renderToday()});
 chips($('#tTemp'),TEMPS,tT,v=>{tT=v;renderToday()});
 function pool(s,t){let p=D.looks.filter(l=>l.scene===s&&l.temps.includes(t));if(p.length<3)p=p.concat(D.looks.filter(l=>l.scene===s&&!p.includes(l)));return p}
-function renderToday(){const p=shuffle(pool(tS,tT)).sort((a,b)=>(b.temps.includes(tT))-(a.temps.includes(tT))).slice(0,3);$('#todayOut').innerHTML=p.map(lookCard).join('')}
+function renderToday(){const sc=l=>(l.temps.includes(tT)?2:0)+((l.photo||l.sim)?1:0); const p=shuffle(pool(tS,tT)).sort((a,b)=>sc(b)-sc(a)).slice(0,3);$('#todayOut').innerHTML=p.map(lookCard).join('')}
 $('#reroll').onclick=renderToday; renderToday();
 
 /* week */
@@ -540,7 +543,8 @@ let lS='all', lT='all', lR=false;
 chips($('#lScene'),[['all','全部'],...D.scenes.map(s=>[s.id,s.name])],lS,v=>{lS=v;renderLooks()});
 chips($('#lTemp'),[['all','全部'],...TEMPS],lT,v=>{lT=v;renderLooks()});
 $('#lReal').onclick=e=>{lR=!lR;e.target.classList.toggle('on',lR);renderLooks()};
-function renderLooks(){const a=D.looks.filter(l=>(lS==='all'||l.scene===lS)&&(lT==='all'||l.temps.includes(lT))&&(!lR||l.photo));
+let lC=false; $('#lCore').onclick=e=>{lC=!lC;e.target.classList.toggle('on',lC);renderLooks()};
+function renderLooks(){const rank=l=>l.real?0:l.core?1:2; const a=D.looks.filter(l=>(lS==='all'||l.scene===lS)&&(lT==='all'||l.temps.includes(lT))&&(!lR||l.real)&&(!lC||l.core)).sort((x,y)=>rank(x)-rank(y));
   $('#lCount').textContent=`共 ${a.length} 套`;$('#lookGrid').innerHTML=a.map(lookCard).join('')}
 renderLooks();
 
@@ -614,8 +618,8 @@ function openItem(k){const i=byK[k];const ls=D.looks.filter(l=>l.items.includes(
  ${ls.length?`<h3 style="margin-top:18px">可以這樣穿</h3><div class="minilooks">${ls.map(miniLook).join('')}</div>`:(i.c==='內衣'?'':'<p class="fitlooks">這件還沒有被搭配到，可以考慮是否斷捨離。</p>')}</div>`);
 }
 function openLook(id){const l=D.looks.find(x=>x.id===id);
- show(`<div class="lookmodal">${l.photo?`<div class="mhead"><img src="${l.photo}" style="object-position:top" alt=""><div class="b">`:'<div class="mbody" style="padding-top:24px"><div>'}
- <p class="eyebrow">${scene[l.scene].name}</p><h2 style="font-size:30px">${l.name}</h2>${l.real?'<p><span class="real" style="position:static">你穿過這套</span></p>':''}
+ show(`<div class="lookmodal">${(l.photo||l.sim)?`<div class="mhead"><img src="${l.photo||l.sim}" style="object-position:top" alt=""><div class="b">`:'<div class="mbody" style="padding-top:24px"><div>'}
+ <p class="eyebrow">${scene[l.scene].name}</p><h2 style="font-size:30px">${l.name}</h2>${l.real?'<p><span class="real" style="position:static">你穿過這套</span></p>':(l.sim?'<p><span class="real sim" style="position:static">AI 模擬</span> <span class="fitlooks">依你的身形畫的示意，實際穿上拍照後會換成實拍</span></p>':'')}
  <p style="font-size:16px">${l.why}</p><p class="temps">${l.temps.map(t=>tempName[t]).join('　')}${l.photoNote?'<br>'+l.photoNote:''}</p></div></div>
  <div class="mbody"><h3 style="margin-top:16px">這套用到的單品</h3><div class="pieces">${l.items.map(k=>{const i=byK[k];return `<div class="card item" data-item="${k}">${img(i)}<div class="b"><div class="n">${i.n}</div></div></div>`}).join('')}</div></div></div>`);
 }
